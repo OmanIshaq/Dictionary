@@ -1,45 +1,34 @@
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
+using System.IO;
+
 
 namespace WindowsFormsApp1
 {
-    public class Node
+    public partial class Form1 : Form
     {
-        public string data { get; set; }
-        public Node left { get; set; }
-        public Node right { get; set; }
+        public Tree temp = new Tree();
+        public Form1()
+        {
+            InitializeComponent();
+        }
+        private void LoadDictionary()
+        {
+            string line;
 
-        public Node()
-        {
-            data = "";
-            left = null;
-            right = null;
-        }
-        public Node(string s)
-        {
-            this.data = s;
-        }
-
-    }
-    public class Tree
-    {
-        public Node root;
-        public Tree()
-        {
-            root = null;
-        }
-        public void InsertData(string data)
-        {
-            if (root == null)
+            System.IO.StreamReader file = new System.IO.StreamReader(@"E:\New folder\4th semester\DSA\DSA\spell corector\spell corector\WORDS.txt");
+            while ((line = file.ReadLine()) != null)
             {
-                root = new Node(data);
-                return;
+                temp.InsertData(line);
             }
-            Insertatchild(root, new Node(data));
-        }
 
-    }
-}
+            file.Close();
+            
+        }
