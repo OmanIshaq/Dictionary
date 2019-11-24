@@ -1,45 +1,33 @@
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using System.IO;
-
-
-namespace WindowsFormsApp1
-{
-    public partial class Form1 : Form
-    {
-        public Tree temp = new Tree();
-        public Form1()
+ private void button2_Click(object sender, EventArgs e)
         {
-            InitializeComponent();
-        }
-        private void LoadDictionary()
-        {
-            string line;
-
-            System.IO.StreamReader file = new System.IO.StreamReader(@"E:\New folder\4th semester\DSA\DSA\spell corector\spell corector\WORDS.txt");
-            while ((line = file.ReadLine()) != null)
+            string a = textBox1.Text;
+            if (Search(temp.root,a)=="Found")
             {
-                temp.InsertData(line);
+                label4.Text = "Word found";
+            }
+            else
+            {
+                label4.Text = "not Found";
+            }
+        }
+        public string Search(Node a, string x)
+        {
+
+            if (a == null)
+                return "Not Found";
+            else if (x.CompareTo(a.data) < 0)
+            {
+                return Search(a.left, x);
+            }
+            else if (x.CompareTo(a.data) > 0)
+            {
+                return Search(a.right, x);
             }
 
-            file.Close();
-            
+            return "Found";
+
+
+
+           
         }
-
-        private void label1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void Form1_Load(object sender, EventArgs e)
-        {
-            LoadDictionary();
-
-        }
+    }
